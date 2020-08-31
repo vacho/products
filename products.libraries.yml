@@ -1,0 +1,10 @@
+# Custom module library for general purposes.
+products:
+  js:
+    js/products.js: {}
+  css:
+    component:
+      css/products.css: {}
+  dependencies:
+    - core/drupalSettings
+    - products/jquery-labelauty
