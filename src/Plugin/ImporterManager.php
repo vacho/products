@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\products;
+namespace Drupal\products\Plugin;
 
+use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Plugin\DefaultPluginManager;
 
 /**
- * Products plugin manager.
+ * Importer plugin manager.
  */
 class ImporterManager extends DefaultPluginManager {
 
@@ -24,14 +24,14 @@ class ImporterManager extends DefaultPluginManager {
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
     parent::__construct(
-      'Plugin/Products',
+      'Plugin/Importer',
       $namespaces,
       $module_handler,
-      'Drupal\products\ProductsInterface',
-      'Drupal\products\Annotation\Products'
+      'Drupal\products\Plugin\ImporterPluginInterface',
+      'Drupal\products\Annotation\Importer'
     );
-    $this->alterInfo('products_info');
-    $this->setCacheBackend($cache_backend, 'products_plugins');
+    $this->alterInfo('products_importer_info');
+    $this->setCacheBackend($cache_backend, 'products_importer_plugins');
   }
 
 }
