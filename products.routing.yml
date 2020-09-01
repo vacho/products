@@ -5,3 +5,35 @@ entity.product.settings:
     _title: 'Product'
   requirements:
     _permission: 'administer product'
+
+entity.importer.collection:
+  path: '/admin/structure/importer'
+  defaults:
+    _entity_list: 'importer'
+    _title: 'importer configuration'
+  requirements:
+    _permission: 'administer importer'
+
+entity.importer.add_form:
+  path: '/admin/structure/importer/add'
+  defaults:
+    _entity_form: 'importer.add'
+    _title: 'Add an importer'
+  requirements:
+    _permission: 'administer importer'
+
+entity.importer.edit_form:
+  path: '/admin/structure/importer/{importer}'
+  defaults:
+    _entity_form: 'importer.edit'
+    _title: 'Edit an importer'
+  requirements:
+    _permission: 'administer importer'
+
+entity.importer.delete_form:
+  path: '/admin/structure/importer/{importer}/delete'
+  defaults:
+    _entity_form: 'importer.delete'
+    _title: 'Delete an importer'
+  requirements:
+    _permission: 'administer importer'

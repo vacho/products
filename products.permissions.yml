@@ -1,5 +1,9 @@
 administer product:
   title: 'Administer product settings'
   restrict access: true
+
 access product overview:
   title: 'Access product overview page'
+
+administer importer:
+  title: 'Administer importer'

@@ -8,3 +8,8 @@ entity.product.collection:
   description: List of products
   route_name: entity.product.collection
   parent: system.admin_content
+entity.importer.overview:
+  title: Importers
+  parent: system.admin_structure
+  description: 'List of importers to extend site functionality.'
+  route_name: entity.importer.collection

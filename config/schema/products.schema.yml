@@ -1,0 +1,22 @@
+products.importer.*:
+  type: config_entity
+  label: 'Importer config'
+  mapping:
+    id:
+      type: string
+      label: ID
+    label:
+      type: label
+      label: Label
+    url:
+      type: uri
+      label: Label
+    plugin:
+      type: string
+      label: Plugin ID
+    update_existing:
+      type: boolean
+      label: Wheter to update exisiting products
+    source:
+      type: string
+      label: The source of the products
