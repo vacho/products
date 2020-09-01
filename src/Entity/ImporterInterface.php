@@ -4,6 +4,7 @@ namespace Drupal\products\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Url;
+
 /**
  * Provides an interface defining an importer entity type.
  */
