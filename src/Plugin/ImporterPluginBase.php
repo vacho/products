@@ -5,7 +5,7 @@ use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\products\Plugin\ImporterPluginInterface;
+use Drupal\products\Entity\Importer;
 use GuzzleHttp\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -36,12 +36,12 @@ abstract class ImporterPluginBase extends PluginBase implements ImporterPluginIn
       $plugin_id,
       $plugin_definition
     );
-
-    $this->entityTypeManager = $httpClient;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->httpClient = $httpClient;
     if (!isset($configuration['config'])) {
       throw new PluginException('Missing importer configuration');
     }
-    if (!$configuration['config'] instanceof ImporterPluginInterface) {
+    if (!$configuration['config'] instanceof Importer) {
       throw new PluginException('Wrong importer configuration');
     }
 
@@ -61,7 +61,7 @@ abstract class ImporterPluginBase extends PluginBase implements ImporterPluginIn
       $plugin_id,
       $plugin_definition,
       $container->get('entity_type.manager'),
-      $container->get('htttp_client')
+      $container->get('http_client')
     );
   }
 

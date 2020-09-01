@@ -2,4 +2,3 @@ services:
   products.importer_manager:
     class: Drupal\products\Plugin\ImporterManager
     parent: default_plugin_manager
-

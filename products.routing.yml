@@ -37,3 +37,11 @@ entity.importer.delete_form:
     _title: 'Delete an importer'
   requirements:
     _permission: 'administer importer'
+
+products.run_plugin:
+  path: /run-plugin
+  defaults:
+    _controller:
+      Drupal\products\Controller\RunPluginController::run
+  requirements:
+    _permission: 'administer importer'
