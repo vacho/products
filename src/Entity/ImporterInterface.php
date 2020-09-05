@@ -3,7 +3,6 @@
 namespace Drupal\products\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Url;
 
 /**
  * Provides an interface defining an importer entity type.
@@ -11,11 +10,19 @@ use Drupal\Core\Url;
 interface ImporterInterface extends ConfigEntityInterface {
 
   /**
-   * Returns the url where the import can get the data from.
+   * Returns the configuration specific to the chosen plugin.
    *
-   * @return Url
+   * @return array
    */
-  public function getUrl();
+  public function getPluginConfiguration();
+
+  /**
+   * Sets the plugin configuration.
+   *
+   * @param array $configuration
+   *   The plugin configuration.
+   */
+  public function setPluginConfiguration(array $configuration);
 
   /**
    * Returns the plugin ID to be used by this importer.

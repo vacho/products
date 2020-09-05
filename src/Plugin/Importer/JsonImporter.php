@@ -1,6 +1,7 @@
 <?php
 namespace Drupal\products\Plugin\Importer;
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\products\Plugin\ImporterPluginBase;
 
 /**
@@ -12,6 +13,36 @@ use Drupal\products\Plugin\ImporterPluginBase;
  * )
  */
 class JsonImporter extends ImporterPluginBase {
+
+  /**
+   * {@inheritDoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'url' => ''
+    ];
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form['url'] = [
+      '#type' => 'url',
+      '#default_value' => $this->configuration['url'],
+      '#title' => $this->t('Url'),
+      '#description' => $this->t('The url to the import resource'),
+      '#required' => TRUE,
+    ];
+    return $form;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+    $this->configuration['url'] = $form_state->getValue('url');
+  }
 
   /**
    * {@inheritDoc}
@@ -37,9 +68,7 @@ class JsonImporter extends ImporterPluginBase {
    * @return \stdClass
    */
   public function getData() {
-    /** @var \Drupal\products\Entity\ImporterInterface $config */
-    $config = $this->configuration['config'];
-    $request = $this->httpClient->get($config->getUrl()->toString());
+    $request = $this->httpClient->get($this->configuration['url']);
     $string = $request->getBody()->getContents();
     return json_decode($string);
   }

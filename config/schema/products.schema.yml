@@ -8,15 +8,26 @@ products.importer.*:
     label:
       type: label
       label: Label
-    url:
-      type: uri
-      label: Label
     plugin:
       type: string
       label: Plugin ID
+    plugin_configuration:
+      type: products.importer.plugin.[%parent.plugin]
     update_existing:
       type: boolean
       label: Wheter to update exisiting products
     source:
       type: string
       label: The source of the products
+
+products.importer.plugin.*:
+  type: mapping
+  label: 'Plugin configuration'
+
+products.importer.plugin.json:
+  type: mapping
+  label: Plugin configuration for the Json importer plugin
+  mapping:
+    url:
+      type: uri
+      label: uri

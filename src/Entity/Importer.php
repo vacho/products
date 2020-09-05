@@ -3,8 +3,6 @@
 namespace Drupal\products\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
-use Drupal\Core\Url;
-use Drupal\products\Entity\ImporterInterface;
 
 /**
  * Defines the importer entity.
@@ -39,8 +37,8 @@ use Drupal\products\Entity\ImporterInterface;
  *   config_export = {
  *     "id",
  *     "label",
- *     "url",
  *     "plugin",
+ *     "plugin_configuration",
  *     "update_existing",
  *     "source"
  *   }
@@ -63,11 +61,11 @@ class Importer extends ConfigEntityBase implements ImporterInterface  {
   protected $label;
 
   /**
-   *  The URL from where the import file can be retrived.
+   *  The configuration specific to the plugin.
    *
-   * @var string
+   * @var array
    */
-  protected $url;
+  protected $plugin_configuration = [];
 
   /**
    * The plugin ID of the plugin to be used for processing this import.
@@ -93,13 +91,6 @@ class Importer extends ConfigEntityBase implements ImporterInterface  {
   /**
    * {@inheritDoc}
    */
-  public function getUrl() {
-    return $this->url ? Url::fromUri($this->url) : NULL;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   public function getPluginId() {
     return $this->plugin;
   }
@@ -109,6 +100,20 @@ class Importer extends ConfigEntityBase implements ImporterInterface  {
    */
   public function updateExisting() {
     return $this->update_existing;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getPluginConfiguration() {
+    return $this->plugin_configuration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function setPluginConfiguration(array $configuration) {
+    $this->plugin_configuration = $configuration;
   }
 
   /**
