@@ -116,7 +116,7 @@ class ImporterForm extends EntityForm {
         'Plugin configuration for <em>@plugin</em>', [
           '@plugin' => $plugin->getPluginDefinition()['label']
         ]);
-      $form['plugin_configuration']['#plugin_id'] = [
+      $form['plugin_configuration'][$plugin_id] = [
         // Defer the building of the plugin subform to a process callback.
         '#process' => [[get_class($this), 'processPluginConfiguration']],
         '#plugin' => $plugin,
@@ -191,12 +191,12 @@ class ImporterForm extends EntityForm {
       $plugin = $this->importerManager->createInstance($plugin_id, $configuration);
       if (isset($form['plugin_configuration'][$plugin_id])) {
         $subform_state = SubformState::createForSubform(
-          $form['plugin_configuration']['plugin_id'],
+          $form['plugin_configuration'][$plugin_id],
           $form_state->getCompleteForm(),
           $form_state
         );
         $plugin->submitConfigurationForm(
-          $form['plugin_configuration']['plugin_id'],
+          $form['plugin_configuration'][$plugin_id],
           $subform_state
         );
       }

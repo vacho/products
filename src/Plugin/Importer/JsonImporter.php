@@ -88,7 +88,7 @@ class JsonImporter extends ImporterPluginBase {
       ->loadByProperties([
         'remote_id' => $data->id,
         'source' => $config->getSource()
-        ]);
+      ]);
 
     // Create.
     if (!$existing) {
@@ -104,16 +104,17 @@ class JsonImporter extends ImporterPluginBase {
       $product->save();
       return;
     }
-
-    // Update.
-    if (!$config->updateExisting()) {
-      return;
+    else {
+      // Update.
+      if (!$config->updateExisting()) {
+        return;
+      }
+      /** @var \Drupal\products\Entity\ProductInterface $product */
+      $product = reset($existing);
+      $product->setName($data->name);
+      $product->setProductNumber($data->number);
+      $product->save();
     }
-    /** @var \Drupal\products\Entity\ProductInterface $product */
-    $product = reset($existing);
-    $product->setName($data->name);
-    $product->setProductNumber($data->number);
-    $product->save();
   }
 
 }

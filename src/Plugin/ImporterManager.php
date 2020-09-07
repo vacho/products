@@ -5,7 +5,6 @@ namespace Drupal\products\Plugin;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\products\Entity\ImporterInterface;
 
 /**
  * Importer plugin manager.
@@ -36,7 +35,7 @@ class ImporterManager extends DefaultPluginManager {
   }
 
   public function createInstanceFromConfig($id) {
-    $config = $this->entityTypeManager->getStorage('importer')->load($id);
+    $config = \Drupal::entityTypeManager()->getStorage('importer')->load($id);
     $configuration = ['config' => $config] + $config->getPluginConfiguration();
     return $this->createInstance($config->getPluginId(), $configuration);
   }
