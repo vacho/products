@@ -15,7 +15,7 @@ products.importer.*:
       type: products.importer.plugin.[%parent.plugin]
     update_existing:
       type: boolean
-      label: Wheter to update exisiting products
+      label: Wheter to update existing products
     source:
       type: string
       label: The source of the products
